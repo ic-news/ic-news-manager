@@ -3,7 +3,12 @@
     "ic-news-manager": {
       "candid": "lib.did",
       "package": "ic-news-manager",
-      "type": "rust"
+      "type": "rust",
+      "metadata": [
+        {
+          "name": "candid:service"
+        }
+      ]
     }
   },
   "defaults": {

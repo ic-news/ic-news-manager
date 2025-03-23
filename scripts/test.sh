@@ -7,7 +7,7 @@ DEFAULT_PRINCIPAL="$(dfx identity get-principal)"
 dfx identity use ic-news
 MANAGER_PRINCIPAL="$(dfx identity get-principal)"
 
-CANISTER_ID="cpmcr-yeaaa-aaaaa-qaala-cai"  # Use your Canister ID
+CANISTER_ID="cpmcr-yeaaa-aaaaa-qaala-cai"
 
 # Check if DFX is running
 if ! pgrep -f "dfx start" > /dev/null; then
@@ -31,7 +31,7 @@ dfx identity use default
 echo "=== Testing Language Operations ==="
 
 echo "4. Creating a single language (English)..."
-dfx canister call $CANISTER_ID create_language '("English", "en", "US", true)'  # Remove opt
+dfx canister call $CANISTER_ID create_language '("English", "en", "US", true)'
 
 echo "5. Querying the language (English)..."
 dfx canister call $CANISTER_ID get_language '("English")'
@@ -87,7 +87,7 @@ dfx canister call $CANISTER_ID list_managers
 echo "=== Testing Language Operations ==="
 
 echo "23. Creating a single language (English)..."
-dfx canister call $CANISTER_ID create_language '("English", "en", "US", true)'  # Remove opt
+dfx canister call $CANISTER_ID create_language '("English", "en", "US", true)' 
 
 echo "24. Querying the language (English)..."
 dfx canister call $CANISTER_ID get_language '("English")'

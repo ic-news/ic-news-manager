@@ -1,5 +1,5 @@
 use ic_cdk_macros::*;
-use crate::models::{channel::Channel, language::Language};
+use crate::models::{channel::Channel, language::Language, rss::Rss};
 use crate::auth::init_admin;
 use candid::Principal;
 

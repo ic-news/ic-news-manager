@@ -1,9 +1,9 @@
 use ic_cdk_macros::*;
 use ic_cdk::api::time;
-use crate::models::{language::Language, channel::Channel};
+use std::collections::HashMap;
+use crate::models::{language::Language, channel::Channel, rss::Rss};
 use crate::storage::STORAGE;
 use crate::auth::is_manager_or_admin;
-
 #[update]
 pub fn create_language(
     language: String,
@@ -188,6 +188,65 @@ pub fn get_channels(platform: Option<String>) -> Vec<Channel> {
         match platform {
             Some(p) => storage_ref.channels.values().filter(|ch| ch.platform == p).cloned().collect(),
             None => storage_ref.channels.values().cloned().collect(),
+        }
+    })
+}
+
+#[update]
+pub fn create_rss(rss: (String, String, bool)) -> Result<String, String> {
+    is_manager_or_admin()?;
+    let (name, rss_url, enabled) = rss;
+    let timestamp = time();
+    let key = format!("{}_{}", name, rss_url);
+    STORAGE.with(|storage| {
+        let mut storage = storage.borrow_mut();
+        let rss_map = storage.rss.get_or_insert_with(HashMap::new); 
+        if rss_map.contains_key(&key) {
+            return Err("RSS already exists".to_string());
+        }
+        let new_rss = Rss {
+            name: name.clone(),
+            rss: rss_url.clone(),
+            enabled,
+            updated_at: timestamp,
+        };
+        rss_map.insert(key.clone(), new_rss);
+        Ok(key)
+    })
+}
+
+#[update]
+pub fn delete_rss(name: String, rss: String) -> Result<(), String> {
+    is_manager_or_admin()?;
+    let key = format!("{}_{}", name, rss);
+    STORAGE.with(|storage| {
+        let mut storage = storage.borrow_mut();
+        match &mut storage.rss {
+            Some(rss_map) => {
+                if rss_map.remove(&key).is_some() {
+                    Ok(())
+                } else {
+                    Err("RSS not found".to_string())
+                }
+            }
+            None => Err("No RSS feeds exist".to_string()),
+        }
+    })
+}
+
+#[query]
+pub fn get_rss(enabled_only: Option<bool>) -> Vec<Rss> {
+    STORAGE.with(|storage| {
+        let storage_ref = storage.borrow();
+        match &storage_ref.rss {
+            Some(rss_map) => {
+                if enabled_only.unwrap_or(false) {
+                    rss_map.values().filter(|rss| rss.enabled).cloned().collect()
+                } else {
+                    rss_map.values().cloned().collect()
+                }
+            }
+            None => vec![],
         }
     })
 }

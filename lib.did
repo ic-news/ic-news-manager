@@ -11,4 +11,7 @@ service : {
   create_channels : (vec record { text; text; bool }) -> (variant { Ok : vec text; Err : text });
   delete_channel : (text, text) -> (variant { Ok; Err : text });
   get_channels : (opt text) -> (vec record { name : text; platform : text; enabled : bool; updated_at : nat64 }) query;
+  create_rss : (record { text; text; bool }) -> (variant { Ok : text; Err : text });
+  delete_rss : (text, text) -> (variant { Ok; Err : text });
+  get_rss : (opt bool) -> (vec record { name : text; rss : text; enabled : bool; updated_at : nat64 }) query;
 }

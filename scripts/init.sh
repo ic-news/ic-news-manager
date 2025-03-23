@@ -91,16 +91,16 @@ fi
 # Initialize languages
 echo "Initializing Languages..."
 LANGUAGES=(
-    "record {\"Chinese\"; \"zh\"; \"cn\"; true}"
-    "record {\"Japanese\"; \"ja\"; \"jp\"; true}"
-    "record {\"Korean\"; \"ko\"; \"kr\"; false}"
-    "record {\"Spanish\"; \"es\"; \"es\"; false}"
-    "record {\"Vietnamese\"; \"vi\"; \"vn\"; false}"
-    "record {\"Thai\"; \"th\"; \"th\"; false}"
-    "record {\"Turkish\"; \"tr\"; \"tr\"; false}"
-    "record {\"French\"; \"fr\"; \"fr\"; false}"
-    "record {\"German\"; \"de\"; \"de\"; false}"
-    "record {\"Russian\"; \"ru\"; \"ru\"; false}"
+    "record {\"简体中文\"; \"zh\"; \"cn\"; true}"
+    "record {\"日本語\"; \"ja\"; \"jp\"; true}"
+    "record {\"한국어\"; \"ko\"; \"kr\"; false}"
+    "record {\"Español\"; \"es\"; \"es\"; false}"
+    "record {\"Tiếng Việt\"; \"vi\"; \"vn\"; false}"
+    "record {\"ไทย\"; \"th\"; \"th\"; false}"
+    "record {\"Türkçe\"; \"tr\"; \"tr\"; false}"
+    "record {\"Français\"; \"fr\"; \"fr\"; false}"
+    "record {\"Deutsch\"; \"de\"; \"de\"; false}"
+    "record {\"Русский\"; \"ru\"; \"ru\"; false}"
 )
 
 LANGUAGE_BATCH=""
